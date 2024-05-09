@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 
 export interface UserInterface{
     username:string,
@@ -6,7 +6,10 @@ export interface UserInterface{
     email:string,
     profilePhoto:string
 
+};
 
+export interface userDocument extends UserInterface, Document{
+    
 }
 
 const userModel = new mongoose.Schema({
