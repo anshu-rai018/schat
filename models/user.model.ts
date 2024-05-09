@@ -1,5 +1,14 @@
 import mongoose from "mongoose";
 
+export interface UserInterface{
+    username:string,
+    fullname:string,
+    email:string,
+    profilePhoto:string
+
+
+}
+
 const userModel = new mongoose.Schema({
     username:{
         type:String,
@@ -21,4 +30,4 @@ const userModel = new mongoose.Schema({
     }
 },{timestamps:true});
 
-export const User = mongoose?.models?.User || mongoose.model()
+export const User = mongoose?.models?.User || mongoose.model('User',userModel);
