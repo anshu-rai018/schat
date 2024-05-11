@@ -1,12 +1,19 @@
-import mongoose, { PopulatedDoc } from "mongoose";
+import mongoose, {Types, PopulatedDoc, Document, Model } from "mongoose";
 import { UserDocument } from "./user.model";
 
 export interface MessageInterface{
-    senderId: Type.ObjectId | PopulatedDoc <UserDocument>
-    receiverId: Type.ObjectId | PopulatedDoc <UserDocument>
+    senderId: Types.ObjectId | PopulatedDoc <UserDocument>,
+    receiverId: Types.ObjectId | PopulatedDoc <UserDocument>,
+    content:string,
+    messageType:'text' | 'image',
+    opened:boolean
+}
+export interface MessageDocument extends MessageInterface, Document{
+    createdAt:Date,
+    updatedAt:Date,
 }
 
-const messageModel = new mongoose.Schema({
+const messageModel = new mongoose.Schema <MessageDocument> ({
     senderId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
@@ -29,3 +36,5 @@ const messageModel = new mongoose.Schema({
         default:false
     }
 },{timestamps:true});
+
+export const Message : Model<MessageDocument> = mongoose?.models?.Message || mongoose.model('Message', messageModel);
