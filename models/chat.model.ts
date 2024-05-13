@@ -1,4 +1,4 @@
-import mongoose, { Document, Types } from "mongoose";
+import mongoose, { Document, Model, Types } from "mongoose";
 
 export interface ChatInterface{
     participants:Types.ObjectId[],
@@ -6,7 +6,8 @@ export interface ChatInterface{
 }
 
 export interface ChatDocument extends ChatInterface, Document{
-    Types.ObjectId[],
+    createdAt:Date,
+    updatedAt:Date,
 }
 
 const chatModel = new mongoose.Schema({
@@ -23,3 +24,4 @@ messages:[
     }
 ]
 },{timestamps:true})
+export const Chat : Model<ChatDocument> = mongoose?.models?.Chat || mongoose.model('Chat', chatModel)

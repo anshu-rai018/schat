@@ -1,12 +1,19 @@
 import React from 'react'
 import Signup from '@/components/Signup'
+import { signIn } from '@/auth'
 
-const page = () => {
+const SignupPage = () => {
+
+   //inline function level
+   const signupHandler = async () => {
+    'use server'
+    await signIn('github');
+  }
   return (
-    <div>
+    <form action={signupHandler}>
       <Signup/>
-    </div>
+    </form>
   )
 }
 
-export default page
+export default SignupPage
