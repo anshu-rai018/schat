@@ -1,19 +1,18 @@
-import mongoose, {Types, PopulatedDoc, Document, Model } from "mongoose";
-import { UserDocument } from "./user.model";
+import mongoose, { Types, Document, Model, PopulatedDoc } from "mongoose"
+import { UserDocument } from "./user.model"
 
 export interface MessageInterface{
-    senderId: Types.ObjectId | PopulatedDoc <UserDocument>,
-    receiverId: Types.ObjectId | PopulatedDoc <UserDocument>,
+    senderId:Types.ObjectId | PopulatedDoc<UserDocument>,
+    receiverId:Types.ObjectId | PopulatedDoc<UserDocument>,
     content:string,
-    messageType:'text' | 'image',
+    messageType: 'text' | 'image',
     opened:boolean
 }
 export interface MessageDocument extends MessageInterface, Document{
     createdAt:Date,
-    updatedAt:Date,
+    updatedAt:Date
 }
-
-const messageModel = new mongoose.Schema <MessageDocument> ({
+const messageModel = new mongoose.Schema<MessageDocument>({
     senderId:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User'
@@ -24,17 +23,16 @@ const messageModel = new mongoose.Schema <MessageDocument> ({
     },
     content:{
         type:String,
-        required:true
+        required:true,
     },
     messageType:{
         type:String,
         required:true,
-        enum:['text','image']
+        enum:['text', 'image']
     },
     opened:{
         type:Boolean,
         default:false
     }
-},{timestamps:true});
-
-export const Message : Model<MessageDocument> = mongoose?.models?.Message || mongoose.model('Message', messageModel);
+}, {timestamps:true});
+export const Message : Model<MessageDocument> = mongoose.models?.Message || mongoose.model('Message', messageModel);

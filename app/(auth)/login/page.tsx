@@ -3,15 +3,13 @@ import Login from '@/components/Login'
 import React from 'react'
 
 const LoginPage = () => {
-
-  //inline function level
   const loginHandler = async () => {
-    'use server'
-    await signIn('github');
+    "use server"
+    await signIn("github");
   }
   return (
     <form action={loginHandler}>
-      <Login />
+        <Login/>
     </form>
   )
 }
